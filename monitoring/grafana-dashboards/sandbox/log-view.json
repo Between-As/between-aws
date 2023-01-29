@@ -1,0 +1,6441 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 220,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "loki",
+          "uid": "rrqe93K4z"
+        },
+        "gridPos": {
+          "h": 27,
+          "w": 14,
+          "x": 0,
+          "y": 0
+        },
+        "id": 61,
+        "options": {
+          "dedupStrategy": "none",
+          "enableLogDetails": true,
+          "prettifyLogMessage": false,
+          "showCommonLabels": false,
+          "showLabels": false,
+          "showTime": true,
+          "sortOrder": "Descending",
+          "wrapLogMessage": false
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "rrqe93K4z"
+            },
+            "editorMode": "code",
+            "expr": "{namespace=\"apps\", job=\"fluentbit\"} !~ `.*\\s200[\\s\\W].*` | json | line_format \"{{printf \\\"%20s\\\" .app_kubernetes_io_name}}   {{.log}}\"",
+            "queryType": "range",
+            "refId": "A"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "logs"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 0
+        },
+        "id": 82,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "adhoc",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-adhoc-9da90313d9/1c0713c8441d3bac"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-adhoc-9da90313d9/1c0713c8441d3bac'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 0
+        },
+        "id": 34,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "booking",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-booking-49cbcaec63/8ae2c6aa6259b58c"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-booking-49cbcaec63/8ae2c6aa6259b58c'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 0
+        },
+        "id": 35,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "canteen",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-canteen-4c825255d0/45fa99eec74c39d3"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-canteen-4c825255d0/45fa99eec74c39d3'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 0
+        },
+        "id": 36,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "conferencemeal",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-conferen-f4fe8e13da/26d2ede9d0200a74"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-conferen-f4fe8e13da/26d2ede9d0200a74'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 0
+        },
+        "id": 37,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "entities",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-entities-3a6376eb63/9287798cb7d1035c"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-entities-3a6376eb63/9287798cb7d1035c'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 3
+        },
+        "id": 31,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "filehandler",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 3
+        },
+        "id": 64,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "insight",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-insight-da9a6a3d8a/01049250ea22c842"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-insight-da9a6a3d8a/01049250ea22c842'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 3
+        },
+        "id": 39,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "invoice",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-invoice-818202a415/24adc69f905e4d9a"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-invoice-818202a415/24adc69f905e4d9a'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 3
+        },
+        "id": 40,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "izyportal",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-izyporta-afb180a5c3/3fab2e90337c2de3"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-izyporta-afb180a5c3/3fab2e90337c2de3'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 3
+        },
+        "id": 41,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "kiosk",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-kiosk-b4c9cc8f67/7241726c5903d548"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-kiosk-b4c9cc8f67/7241726c5903d548'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 6
+        },
+        "id": 42,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 15,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "meetingroomdisplay",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-meetingr-e59bafa06e/e8d765d5d3b7d866"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-meetingr-e59bafa06e/e8d765d5d3b7d866'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 6
+        },
+        "id": 43,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 15,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "microsoftintegration",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-microsof-c69f4a7f87/1db6d735e1ce5bea"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-microsof-c69f4a7f87/1db6d735e1ce5bea'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 6
+        },
+        "id": 44,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "news",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-news-27334a188a/71951e9a93829abc"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-news-27334a188a/71951e9a93829abc'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 6
+        },
+        "id": 45,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "notification",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-notifica-1afc52a98e/2635e2a47579d3e8"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-notifica-1afc52a98e/2635e2a47579d3e8'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 6
+        },
+        "id": 46,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "payment",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-payment-e0dd86ff21/94f4d4f02ac1fbe7"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-payment-e0dd86ff21/94f4d4f02ac1fbe7'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 9
+        },
+        "id": 47,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "publicapi",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-publicap-92a31d96ad/f935b0481c47d310"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-publicap-92a31d96ad/f935b0481c47d310'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 9
+        },
+        "id": 48,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "redshift",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-redshift-871506bb42/c15c1a89c375b334"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-redshift-871506bb42/c15c1a89c375b334'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 9
+        },
+        "id": 49,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "reports",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-reports-edf31a2694/10cf961e9b47c48e"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-reports-edf31a2694/10cf961e9b47c48e'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 9
+        },
+        "id": 50,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "scheduler",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-schedule-9da5c2d406/77071c7240762107"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-schedule-9da5c2d406/77071c7240762107'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 9
+        },
+        "id": 51,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "tickets",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-tickets-bd460031b5/f1d42bdacfa92114"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-tickets-bd460031b5/f1d42bdacfa92114'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "cloudwatch",
+          "uid": "TlLoZF54z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                },
+                {
+                  "color": "dark-green",
+                  "value": 0.0001
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 1
+                },
+                {
+                  "color": "dark-red",
+                  "value": 1.5
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 12
+        },
+        "id": 32,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 35
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "cloudwatch",
+              "uid": "TlLoZF54z"
+            },
+            "dimensions": {
+              "TargetGroup": "targetgroup/k8s-apps-filehand-cabc769c8b/f28de75259681474"
+            },
+            "expression": "",
+            "id": "",
+            "label": "usermanagement",
+            "matchExact": false,
+            "metricEditorMode": 0,
+            "metricName": "TargetResponseTime",
+            "metricQueryType": 1,
+            "namespace": "AWS/ApplicationELB",
+            "period": "",
+            "queryMode": "Metrics",
+            "refId": "A",
+            "region": "eu-west-1",
+            "sql": {
+              "from": {
+                "property": {
+                  "name": "AWS/ApplicationELB",
+                  "type": "string"
+                },
+                "type": "property"
+              },
+              "select": {
+                "name": "AVG",
+                "parameters": [
+                  {
+                    "name": "TargetResponseTime",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              "where": {
+                "expressions": [
+                  {
+                    "operator": {
+                      "name": "=",
+                      "value": "targetgroup/k8s-apps-usermana-ec3aa0e3a5/1d4eaa225a5dd9d2"
+                    },
+                    "property": {
+                      "name": "TargetGroup",
+                      "type": "string"
+                    },
+                    "type": "operator"
+                  }
+                ],
+                "type": "and"
+              }
+            },
+            "sqlExpression": "SELECT AVG(TargetResponseTime) FROM \"AWS/ApplicationELB\" WHERE TargetGroup = 'targetgroup/k8s-apps-usermana-ec3aa0e3a5/1d4eaa225a5dd9d2'",
+            "statistic": "Average"
+          }
+        ],
+        "transformations": [],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 12
+        },
+        "id": 88,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"adhoc\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "adhoc"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 12
+        },
+        "id": 89,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"booking\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "booking"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 12
+        },
+        "id": 90,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"canteen\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "canteen"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 12
+        },
+        "id": 91,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"conferencemeal\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "conferencemeal"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 15
+        },
+        "id": 92,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"entities\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "entities"
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 15
+        },
+        "id": 93,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"filehandler\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "filehandler",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 15
+        },
+        "id": 98,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"meetingroomdisplay\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "meetingroomdisplay",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 15
+        },
+        "id": 94,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"insight\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "insight",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 15
+        },
+        "id": 95,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"invoice\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "invoice",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 18
+        },
+        "id": 96,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"izyportal\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "izyportal",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 18
+        },
+        "id": 97,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"kiosk\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "kiosk",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 18
+        },
+        "id": 103,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"publicapi\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "publicapi",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 18
+        },
+        "id": 99,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"microsoftintegration\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "microsoftintegration",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 18
+        },
+        "id": 100,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"news\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "news",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 21
+        },
+        "id": 101,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"notification\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "notification",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 21
+        },
+        "id": 102,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"payment\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "payment",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 18,
+          "y": 21
+        },
+        "id": 105,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"redshift\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "redshift",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 20,
+          "y": 21
+        },
+        "id": 106,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"reports\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "reports",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 22,
+          "y": 21
+        },
+        "id": 107,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"scheduler\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "scheduler",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 14,
+          "y": 24
+        },
+        "id": 108,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"tickets\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "tickets",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#646464",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "dtdhms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 2,
+          "x": 16,
+          "y": 24
+        },
+        "id": 109,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {
+            "titleSize": 16,
+            "valueSize": 22
+          },
+          "textMode": "value_and_name"
+        },
+        "pluginVersion": "9.1.6",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "dimensions": {},
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\", workload=\"usermanagement\"}",
+            "expression": "",
+            "format": "table",
+            "id": "",
+            "instant": true,
+            "label": "",
+            "legendFormat": "__auto",
+            "matchExact": true,
+            "metricEditorMode": 0,
+            "metricName": "",
+            "metricQueryType": 0,
+            "namespace": "",
+            "period": "",
+            "queryMode": "Metrics",
+            "range": false,
+            "refId": "A",
+            "region": "default",
+            "sqlExpression": "",
+            "statistic": "Average"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "(time() - kube_pod_created{namespace=\"apps\"})",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "pod"
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "isNotNull",
+                    "options": {}
+                  },
+                  "fieldName": "workload"
+                }
+              ],
+              "match": "any",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Value #B": {
+                  "aggregations": [
+                    "max"
+                  ],
+                  "operation": "aggregate"
+                },
+                "workload": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B (max)": "usermanagement",
+                "workload": ""
+              }
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Mixed --"
+        },
+        "description": "4XX responses",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 10,
+          "x": 4,
+          "y": 27
+        },
+        "id": 62,
+        "interval": "1m",
+        "options": {
+          "autoSizeColumns": true,
+          "autoSizePolygons": false,
+          "autoSizeRows": false,
+          "compositeConfig": {
+            "animationSpeed": "1500",
+            "composites": [],
+            "enabled": false
+          },
+          "ellipseCharacters": 8,
+          "ellipseEnabled": true,
+          "globalAutoScaleFonts": false,
+          "globalClickthrough": "",
+          "globalClickthroughNewTabEnabled": true,
+          "globalClickthroughSanitizedEnabled": true,
+          "globalDecimals": 0,
+          "globalDisplayMode": "all",
+          "globalDisplayTextTriggeredEmpty": "OK",
+          "globalFillColor": "dark-red",
+          "globalFontSize": 14,
+          "globalGradientsEnabled": true,
+          "globalOperator": "last",
+          "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
+          "globalPolygonBorderSize": 2,
+          "globalPolygonSize": 40,
+          "globalRegexPattern": "",
+          "globalShape": "square",
+          "globalShowValueEnabled": true,
+          "globalTextFontAutoColorEnabled": false,
+          "globalTextFontColor": "#000000",
+          "globalThresholdsConfig": [
+            {
+              "color": "#37872D",
+              "state": 0,
+              "value": 0
+            },
+            {
+              "color": "#d78200",
+              "state": 1,
+              "value": 0.05
+            },
+            {
+              "color": "#C4162A",
+              "state": 2,
+              "value": 0.25
+            }
+          ],
+          "globalTooltipsEnabled": true,
+          "globalTooltipsShowTimestampEnabled": true,
+          "globalUnitFormat": "percentunit",
+          "layoutDisplayLimit": 100,
+          "layoutNumColumns": 11,
+          "layoutNumRows": 2,
+          "overrideConfig": {
+            "overrides": []
+          },
+          "sortByDirection": 1,
+          "sortByField": "name",
+          "tooltipDisplayMode": "all",
+          "tooltipDisplayTextTriggeredEmpty": "OK",
+          "tooltipPrimarySortByField": "thresholdLevel",
+          "tooltipPrimarySortDirection": 1,
+          "tooltipSecondarySortByField": "value",
+          "tooltipSecondarySortDirection": 1
+        },
+        "pluginVersion": "2.0.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "rrqe93K4z"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({namespace=\"apps\"} |~ \".*(HTTP/1.1 4\\\\d\\\\d).*\" | __error__=`` [$__range])",
+            "hide": false,
+            "queryType": "instant",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "label_replace(count by(workload) (namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\"}), \"app_kubernetes_io_name\", \"$1\", \"workload\", \"(.*)\")",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "rrqe93K4z"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({namespace=\"apps\"} |~ \".*(HTTP/1.1 \\\\d\\\\d\\\\d).*\" | __error__=`` [$__range])",
+            "hide": false,
+            "queryType": "instant",
+            "refId": "C"
+          }
+        ],
+        "title": "4XX Responses",
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "app_kubernetes_io_name"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Line": false,
+                "Time": true,
+                "Time 1": true,
+                "Time 2": true,
+                "Value": true,
+                "Value #C": false,
+                "app_kubernetes_io_instance": true,
+                "id": true,
+                "job": true,
+                "labels": true,
+                "namespace": true,
+                "node_name": true,
+                "pod": true,
+                "pod_template_hash": true,
+                "tsNs": true,
+                "workload": true
+              },
+              "indexByName": {
+                "Line": 3,
+                "Time": 2,
+                "app_kubernetes_io_instance": 6,
+                "app_kubernetes_io_name": 0,
+                "id": 5,
+                "job": 7,
+                "labels": 1,
+                "namespace": 8,
+                "node_name": 9,
+                "pod": 10,
+                "pod_template_hash": 11,
+                "tsNs": 4
+              },
+              "renameByName": {}
+            }
+          },
+          {
+            "disabled": true,
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Line": {
+                  "aggregations": [
+                    "count"
+                  ],
+                  "operation": "aggregate"
+                },
+                "app_kubernetes_io_name": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "binary": {
+                "left": "Value #A",
+                "operator": "/",
+                "reducer": "sum",
+                "right": "Value #C"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "binary": {
+                "left": "Value #A / Value #C",
+                "reducer": "sum"
+              },
+              "mode": "binary",
+              "reduce": {
+                "include": [
+                  "Value #A / Value #C"
+                ],
+                "reducer": "lastNotNull"
+              }
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "number",
+                  "targetField": "Value #A / Value #C"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "Value #A / Value #C"
+                ],
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Value #A": true,
+                "Value #A / Value #C": true,
+                "Value #C": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "app_kubernetes_io_name": ""
+              }
+            }
+          },
+          {
+            "id": "rowsToFields",
+            "options": {
+              "mappings": [
+                {
+                  "fieldName": "app_kubernetes_io_name",
+                  "handlerKey": "field.name"
+                },
+                {
+                  "fieldName": "Total",
+                  "handlerKey": "field.value"
+                }
+              ]
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "grafana-polystat-panel"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Mixed --"
+        },
+        "description": "5XX responses",
+        "fieldConfig": {
+          "defaults": {
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 10,
+          "x": 14,
+          "y": 27
+        },
+        "id": 63,
+        "interval": "1m",
+        "options": {
+          "autoSizeColumns": true,
+          "autoSizePolygons": false,
+          "autoSizeRows": false,
+          "compositeConfig": {
+            "animationSpeed": "1500",
+            "composites": [],
+            "enabled": false
+          },
+          "ellipseCharacters": 8,
+          "ellipseEnabled": true,
+          "globalAutoScaleFonts": false,
+          "globalClickthrough": "",
+          "globalClickthroughNewTabEnabled": true,
+          "globalClickthroughSanitizedEnabled": true,
+          "globalDecimals": 0,
+          "globalDisplayMode": "all",
+          "globalDisplayTextTriggeredEmpty": "OK",
+          "globalFillColor": "dark-red",
+          "globalFontSize": 14,
+          "globalGradientsEnabled": true,
+          "globalOperator": "last",
+          "globalPolygonBorderColor": "rgba(0, 0, 0, 0)",
+          "globalPolygonBorderSize": 2,
+          "globalPolygonSize": 40,
+          "globalRegexPattern": "",
+          "globalShape": "square",
+          "globalShowValueEnabled": true,
+          "globalTextFontAutoColorEnabled": false,
+          "globalTextFontColor": "#000000",
+          "globalThresholdsConfig": [
+            {
+              "color": "#37872D",
+              "state": 0,
+              "value": 0
+            },
+            {
+              "color": "#d78200",
+              "state": 1,
+              "value": 0.05
+            },
+            {
+              "color": "#C4162A",
+              "state": 2,
+              "value": 0.25
+            }
+          ],
+          "globalTooltipsEnabled": true,
+          "globalTooltipsShowTimestampEnabled": true,
+          "globalUnitFormat": "percentunit",
+          "layoutDisplayLimit": 100,
+          "layoutNumColumns": 11,
+          "layoutNumRows": 2,
+          "overrideConfig": {
+            "overrides": []
+          },
+          "sortByDirection": 1,
+          "sortByField": "name",
+          "tooltipDisplayMode": "all",
+          "tooltipDisplayTextTriggeredEmpty": "OK",
+          "tooltipPrimarySortByField": "thresholdLevel",
+          "tooltipPrimarySortDirection": 1,
+          "tooltipSecondarySortByField": "value",
+          "tooltipSecondarySortDirection": 1
+        },
+        "pluginVersion": "2.0.4",
+        "targets": [
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "rrqe93K4z"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({namespace=\"apps\"} |~ \".*(HTTP/1.1 5\\\\d\\\\d).*\" | __error__=`` [$__range])",
+            "hide": false,
+            "queryType": "instant",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "label_replace(count by(workload) (namespace_workload_pod:kube_pod_owner:relabel{namespace=\"apps\"}), \"app_kubernetes_io_name\", \"$1\", \"workload\", \"(.*)\")",
+            "format": "table",
+            "hide": false,
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "loki",
+              "uid": "rrqe93K4z"
+            },
+            "editorMode": "code",
+            "expr": "count_over_time({namespace=\"apps\"} |~ \".*(HTTP/1.1 \\\\d\\\\d\\\\d).*\" | __error__=`` [$__range])",
+            "hide": false,
+            "queryType": "instant",
+            "refId": "C"
+          }
+        ],
+        "title": "5XX Responses",
+        "transformations": [
+          {
+            "id": "seriesToColumns",
+            "options": {
+              "byField": "app_kubernetes_io_name"
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Line": false,
+                "Time": true,
+                "Time 1": true,
+                "Time 2": true,
+                "Value": true,
+                "Value #C": false,
+                "app_kubernetes_io_instance": true,
+                "id": true,
+                "job": true,
+                "labels": true,
+                "namespace": true,
+                "node_name": true,
+                "pod": true,
+                "pod_template_hash": true,
+                "tsNs": true,
+                "workload": true
+              },
+              "indexByName": {
+                "Line": 3,
+                "Time": 2,
+                "app_kubernetes_io_instance": 6,
+                "app_kubernetes_io_name": 0,
+                "id": 5,
+                "job": 7,
+                "labels": 1,
+                "namespace": 8,
+                "node_name": 9,
+                "pod": 10,
+                "pod_template_hash": 11,
+                "tsNs": 4
+              },
+              "renameByName": {}
+            }
+          },
+          {
+            "disabled": true,
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Line": {
+                  "aggregations": [
+                    "count"
+                  ],
+                  "operation": "aggregate"
+                },
+                "app_kubernetes_io_name": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "binary": {
+                "left": "Value #A",
+                "operator": "/",
+                "reducer": "sum",
+                "right": "Value #C"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "binary": {
+                "left": "Value #A / Value #C",
+                "reducer": "sum"
+              },
+              "mode": "binary",
+              "reduce": {
+                "include": [
+                  "Value #A / Value #C"
+                ],
+                "reducer": "lastNotNull"
+              }
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "number",
+                  "targetField": "Value #A / Value #C"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "mode": "reduceRow",
+              "reduce": {
+                "include": [
+                  "Value #A / Value #C"
+                ],
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Value #A": true,
+                "Value #A / Value #C": true,
+                "Value #C": true
+              },
+              "indexByName": {},
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "rowsToFields",
+            "options": {
+              "mappings": [
+                {
+                  "fieldName": "app_kubernetes_io_name",
+                  "handlerKey": "field.name"
+                },
+                {
+                  "fieldName": "Total",
+                  "handlerKey": "field.value"
+                }
+              ]
+            }
+          }
+        ],
+        "transparent": true,
+        "type": "grafana-polystat-panel"
+      }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [
+      "Izy"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m"
+      ]
+    },
+    "timezone": "",
+    "title": "Izy / Environment Status / Log view",
+    "uid": "qrfHsqt4k",
+    "version": 24,
+    "weekStart": ""
+  }

@@ -1,0 +1,21 @@
+ingress:
+  enabled: true
+  path: /
+  annotations:
+    alb.ingress.kubernetes.io/group.name: apps
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/security-groups: sg-095e0bd3011b98bdb
+    alb.ingress.kubernetes.io/subnets: subnet-0d91e3c4e0876a717,subnet-04ff721edeb55c7d0,subnet-0bc73c4431939529b
+  hosts: ["sandbox-grafana.izy.no"]
+  ingressClassName: alb
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.tools.svc.cluster.local
+      access: proxy
+      isDefault: true

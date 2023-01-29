@@ -1,0 +1,126 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Cloudformation initial setup (statefile-bucket) for terraform env
+Parameters: 
+  EnvName: 
+    Type: String
+    Default: stage
+    Description: Enviroment name (for pre-provisioning)
+  CreateTerraformUser:
+    Description: Whether I should create a terraform user.
+    Default: false
+    Type: String
+    AllowedValues: [true, false]
+
+Conditions:
+  TerraformUserCondition:
+    !Equals [true, !Ref CreateTerraformUser]
+
+Resources:
+  KmsTerraformAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: !Sub alias/tfkey-${EnvName}
+      TargetKeyId:
+        Ref: KmsTerraformKey
+
+  KmsTerraformKey:
+    Type: 'AWS::KMS::Key'
+    Properties:
+      Description: Key used to encrypt
+      KeyPolicy:
+        Version: 2012-10-17
+        Id: key-default-1
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Join 
+                - ''
+                - - 'arn:aws:iam::'
+                  - !Ref 'AWS::AccountId'
+                  - ':root'
+            Action: 'kms:*'
+            Resource: '*'
+      Tags: 
+        - Key: "Created by"
+          Value: "Cloudformation"
+        - Key: "Purpose"
+          Value: "IAC"
+        - Key: "Managed"
+          Value: "IAC"
+
+  StateBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: 'aws:kms'
+              KMSMasterKeyID: !Sub 'arn:aws:kms:${AWS::Region}:${AWS::AccountId}:${KmsTerraformAlias}'
+      BucketName: !Sub 'terraform-state-bucket-${AWS::Region}-${AWS::AccountId}-${EnvName}'
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags: 
+        - Key: "Created by"
+          Value: "Cloudformation"
+        - Key: "Purpose"
+          Value: "IAC"
+        - Key: "Managed"
+          Value: "IAC"
+  StateBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref StateBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - 's3:GetObject'
+            Effect: Deny
+            Resource:
+              - !Sub arn:aws:s3:::${StateBucket}/*
+            Principal:
+              AWS:
+                - '*'
+            Condition:
+              Bool:
+                'aws:SecureTransport':
+                  - false
+  TerraformUser:
+    Condition: TerraformUserCondition
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: terraform
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      Tags: 
+        - Key: "Created by"
+          Value: "Cloudformation"
+        - Key: "Purpose"
+          Value: "IAC"
+        - Key: "Managed"
+          Value: "IAC"
+
+  LockTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: LockID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: LockID
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      TableName: !Sub 'dynamodbLockTable-${EnvName}'
+      Tags: 
+        - Key: "Created by"
+          Value: "Cloudformation"
+        - Key: "Purpose"
+          Value: "IAC"
+        - Key: "Managed"
+          Value: "IAC"

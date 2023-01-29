@@ -1,0 +1,45 @@
+global:
+  psp:
+    annotations:
+      eks.amazonaws.com/role-arn: "${iam_vault_service_role}"   
+
+injector:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "${iam_vault_agent_injector_service_role}" 
+
+server:
+  ha:
+    enabled: true
+    replicas: 3
+    config: |
+        ui = true
+        
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+        }
+        storage "dynamodb" {
+          ha_enabled = "true"
+          table = "${dynamodb_table_name}"
+        }
+        seal "awskms" {
+          kms_key_id = "${kms_key}"
+        }
+  
+  affinity: null
+    
+  serviceAccount:
+    name: "vault"
+    annotations:
+      eks.amazonaws.com/role-arn: "${iam_vault_service_role}"   
+
+ui:
+  annotations:
+      eks.amazonaws.com/role-arn: "${iam_vault_service_role}"   
+
+csi:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "${iam_vault_service_role}"   

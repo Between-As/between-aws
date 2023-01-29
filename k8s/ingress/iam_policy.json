@@ -1,0 +1,18 @@
+--2022-05-09 11:06:45--  http://curl/
+Translacja curl (curl)... nieudane: Brak adresu związanego z nazwą hosta.
+wget: nie udało się rozwiązać adresu hosta `curl'
+--2022-05-09 11:06:45--  https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.1/docs/install/iam_policy.json
+Załadowano certyfikat CA '/etc/ssl/certs/ca-certificates.crt'
+Translacja raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8002::154, 2606:50c0:8001::154, 2606:50c0:8000::154, ...
+Łączenie się z raw.githubusercontent.com (raw.githubusercontent.com)|2606:50c0:8002::154|:443... połączono.
+Żądanie HTTP wysłano, oczekiwanie na odpowiedź... 200 OK
+Długość: 7617 (7,4K) [text/plain]
+Zapis do: `iam_policy.json.1'
+
+     0K .......                                               100% 10,7M=0,001s
+
+2022-05-09 11:06:45 (10,7 MB/s) - zapisano `iam_policy.json.1' [7617/7617]
+
+ZAKOŃCZONO --2022-05-09 11:06:45--
+Całkowity czas zegarowy: 0,3s
+Pobrano: 1 plików, 7,4K w 0,001s (10,7 MB/s)

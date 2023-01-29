@@ -1,0 +1,12 @@
+clusterName: ${cluster_name}
+
+serviceAccount:
+  name: "aws-load-balancer-controller"
+  annotations:
+    eks.amazonaws.com/role-arn: "${iam_service_role}" 
+
+enableShield: false
+# Enable WAF addon for ALB (default true)
+enableWaf: false
+# Enable WAF V2 addon for ALB (default true)
+enableWafv2: false

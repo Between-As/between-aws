@@ -1,0 +1,8 @@
+autoDiscovery:
+  clusterName: "${cluster_name}" 
+
+awsRegion: "${aws_region}" 
+
+rbac:
+  serviceAccount:
+    eks.amazonaws.com/role-arn: "${iam_service_role}" 
