@@ -1,0 +1,5 @@
+.idea
+.terraform
+environments/production/.terraform.lock.hcl
+environments/sandbox/.terraform.lock.hcl
+environments/staging/.terraform.lock.hcl

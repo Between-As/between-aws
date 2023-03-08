@@ -35,6 +35,7 @@ output "database_subnet_ids_map" {
 output "az_count" {
   value = var.availability_zones
 }
+
 output "security_groups" {
   value = aws_security_group.main
 }

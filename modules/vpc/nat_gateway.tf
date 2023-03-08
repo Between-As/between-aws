@@ -6,7 +6,7 @@ resource "aws_eip" "nat_gateway" {
     Name = format("%s-nat-gateway-%s", lower(local.tag_environment), substr(each.key, -2, 2))
   }
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 

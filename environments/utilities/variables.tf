@@ -58,7 +58,7 @@ variable "oidc_eks_thumbprint_sandbox" {
   description = "OIDC thumbprint from sandbox EKS"
 }
 
-variable "izy_no_domain_id" {
+variable "between_as_domain_id" {
   type        = string
-  description = "ID of izy.no Route53 domain"
+  description = "ID of Route53 domain"
 }

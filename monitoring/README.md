@@ -16,11 +16,11 @@ c) Restart Grafana.
 
 a) sandbox
 ```
-    eks.amazonaws.com/role-arn: arn:aws:iam::759976795385:role/izy30-eks-sandbox-tools-grafana-servicerole
+    eks.amazonaws.com/role-arn: arn:aws:iam::803978285220:role/izy30-eks-sandbox-tools-grafana-servicerole
 ```
 b) staging
 ```
-    eks.amazonaws.com/role-arn: arn:aws:iam::759976795385:role/izy30-eks-staging-tools-grafana-servicerole
+    eks.amazonaws.com/role-arn: arn:aws:iam::803978285220:role/izy30-eks-staging-tools-grafana-servicerole
 ```
 c) production
 ```

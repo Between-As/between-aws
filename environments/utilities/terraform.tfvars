@@ -7,7 +7,7 @@ aws = {
 
 common_tags = {
   environment = "utilities"
-  maintainer  = "hostersi"
+  maintainer  = "Edward"
   iac         = "true"
   managed     = "terraform"
 }
@@ -15,13 +15,13 @@ common_tags = {
 # Route53
 route53_domains = {
   "izy.no" = {
-    domain_name   = "izy.no"
+    domain_name   = "between.as"
     force_destroy = true
     is_internal   = false
   }
 }
 
-izy_no_domain_id               = "Z005741429QSQ2PFVZLW8"
+between_as_domain_id               = "Z005741429QSQ2PFVZLW8"
 
 # IAM Identity Providers are created on utilities account for cross-account access
 oidc_eks_url_production        = "https://oidc.eks.eu-north-1.amazonaws.com/id/0396D5ECF1620EE123147C1CB6A72266"

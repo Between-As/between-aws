@@ -5,22 +5,22 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:iam::759976795385:role/IZY-SANDBOX-2
+    - rolearn: arn:aws:iam::803978285220:role/IZY-SANDBOX-2
       username: codebuild-sandbox-entities-deploy-service-role
       groups:
         - system:masters
-    - rolearn: arn:aws:iam::759976795385:role/codebuild-sandbox-entities-deploy-service-role
+    - rolearn: arn:aws:iam::803978285220:role/codebuild-sandbox-entities-deploy-service-role
       username: codebuild-sandbox-entities-deploy-service-role
       groups:
         - system:masters
-    - rolearn: arn:aws:iam::759976795385:role/izy30-eks-sandbox-worker-role
+    - rolearn: arn:aws:iam::803978285220:role/izy30-eks-sandbox-worker-role
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
         - system:nodes
-    - rolearn: arn:aws:iam::759976795385:role/izy30-eks-sandbox-operator-role
+    - rolearn: arn:aws:iam::803978285220:role/izy30-eks-sandbox-operator-role
       username: eks-operator
       groups:
         - system:masters
-    - rolearn: arn:aws:iam::759976795385:role/izy30-eks-sandbox-readonly-role
+    - rolearn: arn:aws:iam::803978285220:role/izy30-eks-sandbox-readonly-role
       username: eks-readonly
