@@ -43,7 +43,7 @@ module "eks_nodegroup" {
   cluster_name      = module.eks_cluster.cluster_name
   node_role_arn     = module.eks_iam.eks_worker_arn
   node_subnet_ids   = module.network.private_subnet_ids
-  desired_capacity  = 1
+  desired_capacity  = 2
   max_capacity      = 8
   instance_type     = "t3.medium"
   volume_encryption = true
