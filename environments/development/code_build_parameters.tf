@@ -40,11 +40,11 @@ module "parameter_store_code_build" {
     crm_deploy = [
       "aws_ecr_repository_url", "micro_service_name"
     ]
-    crm-web-app = [
+    crmweb = [
       "aws_ecr_repository_url", "AWS_ECR_REPOSITORY_MIRROR_URL_NGINX", "AWS_ECR_REPOSITORY_MIRROR_URL_NODE", "micro_service_name"
     ]
 
-    crm-web-app_deploy = [
+    crmweb_deploy = [
       "aws_ecr_repository_url", "micro_service_name"
     ]
   }
