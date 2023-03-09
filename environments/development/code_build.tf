@@ -34,5 +34,27 @@ module "code_build" {
         }
       }
     }
+    crm = {
+      source_version  = "v1.0.0"
+      repository_url  = "https://github.com/Between-As/between-crm-backend.git"
+      logs            = {
+        cloudwatch_logs = {
+          status      = "ENABLED"
+          group_name  = null
+          stream_name = null
+        }
+      }
+    }
+    crm_deploy = {
+      source_version  = "main"
+      repository_url  = "https://github.com/Between-As/between-devops.git"
+      logs            = {
+        cloudwatch_logs = {
+          status      = "ENABLED"
+          group_name  = null
+          stream_name = null
+        }
+      }
+    }
   }
 }

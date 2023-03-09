@@ -1,7 +1,7 @@
 resource "aws_codebuild_project" "main" {
   for_each = var.codebuild_configuration
 
-  name         = "${local.tag_environment}-${each.key}"
+  name         = "${local.tag_environment}-staging-${each.key}"
   service_role = var.service_role_arn
 
   source_version = each.value.source_version

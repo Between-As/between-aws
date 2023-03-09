@@ -32,5 +32,20 @@ module "parameter_store_code_build" {
     usermanagement_deploy = [
       "aws_ecr_repository_url", "micro_service_name"
     ]
+
+    crm = [
+      "aws_ecr_repository_url", "root_db_username", "root_db_password", "user_name", "password", "micro_service_name"
+    ]
+
+    crm_deploy = [
+      "aws_ecr_repository_url", "micro_service_name"
+    ]
+    crm-web-app = [
+      "aws_ecr_repository_url", "AWS_ECR_REPOSITORY_MIRROR_URL_NGINX", "AWS_ECR_REPOSITORY_MIRROR_URL_NODE", "micro_service_name"
+    ]
+
+    crm-web-app_deploy = [
+      "aws_ecr_repository_url", "micro_service_name"
+    ]
   }
 }
